@@ -27,12 +27,17 @@ export function Practices() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ delay: i * 0.06, duration: 0.5 }}
-            whileHover={{ y: -8 }}
+            whileHover={{ y: -8, rotateY: 6 }}
+            style={{ transformPerspective: 900 }}
             className="group relative overflow-hidden rounded-3xl border border-border bg-card p-6 shadow-soft transition-shadow hover:shadow-glow"
           >
-            <span className="bg-leaf-gradient flex h-12 w-12 items-center justify-center rounded-2xl text-primary-foreground">
+            <motion.span
+              className="bg-leaf-gradient flex h-12 w-12 items-center justify-center rounded-2xl text-primary-foreground"
+              whileHover={{ rotate: 12, scale: 1.1 }}
+              transition={{ duration: 0.3 }}
+            >
               <p.icon className="h-6 w-6" />
-            </span>
+            </motion.span>
             <h3 className="mt-4 text-lg text-forest">{p.title}</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
             <motion.span
