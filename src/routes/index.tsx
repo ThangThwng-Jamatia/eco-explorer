@@ -35,7 +35,7 @@ function Index() {
   return (
     <main>
       <TourNav />
-      <h1 className="sr-only">Green Business Model — Sustainable Today, Better Tomorrow</h1>
+      
       <Hero />
       <Intro />
       <InteractiveShop />
