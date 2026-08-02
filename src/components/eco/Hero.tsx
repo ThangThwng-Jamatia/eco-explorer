@@ -18,6 +18,31 @@ function Cloud({ top, delay, dur, scale }: { top: string; delay: number; dur: nu
   );
 }
 
+function Leaf_({
+  left,
+  delay,
+  dur,
+  scale,
+}: {
+  left: string;
+  delay: number;
+  dur: number;
+  scale: number;
+}) {
+  return (
+    <motion.div
+      className="pointer-events-none absolute top-[-40px] text-leaf/70"
+      style={{ left }}
+      initial={{ y: -40, opacity: 0, rotate: 0 }}
+      animate={{ y: "620px", opacity: [0, 1, 1, 0], rotate: 360, x: [0, 18, -14, 0] }}
+      transition={{ duration: dur, delay, repeat: Infinity, ease: "linear" }}
+      aria-hidden
+    >
+      <Leaf className="h-5 w-5" style={{ transform: `scale(${scale})` }} />
+    </motion.div>
+  );
+}
+
 function Bird({ top, left, delay }: { top: string; left: string; delay: number }) {
   return (
     <motion.svg
@@ -50,6 +75,10 @@ export function Hero() {
       <Cloud top="6%" delay={26} dur={60} scale={1.3} />
       <Bird top="22%" left="18%" delay={0} />
       <Bird top="30%" left="60%" delay={2.5} />
+      <Leaf_ left="8%" delay={0} dur={11} scale={1} />
+      <Leaf_ left="34%" delay={3.5} dur={13} scale={0.75} />
+      <Leaf_ left="72%" delay={1.5} dur={12} scale={1.1} />
+      <Leaf_ left="88%" delay={6} dur={10} scale={0.85} />
 
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 lg:grid-cols-2">
         <motion.div
@@ -60,10 +89,17 @@ export function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full bg-card/80 px-4 py-1.5 text-xs font-semibold tracking-[0.18em] text-forest uppercase shadow-soft">
             <QrCode className="h-4 w-4" /> Scan · Explore · Learn
           </span>
-          <h1 className="mt-5 text-4xl leading-[1.05] text-forest sm:text-6xl">
-            Green Business
-            <br />
-            Model
+          <h1 className="mt-5 flex flex-wrap gap-x-3 text-4xl leading-[1.05] text-forest sm:text-6xl">
+            {["Green", "Business", "Model"].map((word, i) => (
+              <motion.span
+                key={word}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {word}
+              </motion.span>
+            ))}
           </h1>
           <p className="mt-4 max-w-md text-lg text-secondary-foreground">
             Sustainable Today. <span className="text-emerald font-semibold">Better Tomorrow.</span>
@@ -73,18 +109,24 @@ export function Hero() {
             rainwater harvesting, waste segregation and eco-friendly practices, all in one tour.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
-            <a
+            <motion.a
               href="#intro"
-              className="bg-leaf-gradient inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft transition-transform hover:-translate-y-0.5"
+              className="bg-leaf-gradient inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-primary-foreground shadow-soft"
+              whileHover={{ scale: 1.05, y: -2, boxShadow: "0 12px 30px -8px oklch(0.45 0.14 150 / 0.55)" }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
             >
               <Leaf className="h-4 w-4" /> Explore Project
-            </a>
-            <a
+            </motion.a>
+            <motion.a
               href="#quiz"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-forest transition-transform hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-forest"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
             >
               Play the Mini Game
-            </a>
+            </motion.a>
           </div>
         </motion.div>
 
