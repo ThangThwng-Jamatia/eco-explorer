@@ -252,3 +252,143 @@
 @utility animate-ray {
   animation: pulse-ray 2.2s ease-in-out infinite;
 }
+
+/*
+ * Story scene "lighting up" system.
+ * .scene-active is toggled by GSAP ScrollTrigger on the frame currently
+ * centered in the scrub — everything below is inert until that class lands,
+ * so scenes read as dormant/dim until the story reaches them.
+ */
+@keyframes scene-tilt-sway {
+  0%,
+  100% {
+    transform: rotateY(-6deg) rotateX(4deg);
+  }
+  50% {
+    transform: rotateY(6deg) rotateX(-2deg);
+  }
+}
+
+@keyframes scene-water-rise {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-58px);
+  }
+}
+
+@keyframes scene-bin-lift {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  40% {
+    transform: translateY(-6px) scale(1.04);
+  }
+}
+
+@keyframes scene-window-pulse {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.scene-tilt {
+  transition: opacity 0.4s ease;
+  opacity: 0.55;
+  animation: scene-tilt-sway 7s ease-in-out infinite;
+}
+
+.scene-glow,
+.scene-rays,
+.scene-cell,
+.scene-bin-glow,
+.scene-window {
+  opacity: 0.3;
+  transition:
+    opacity 0.6s ease,
+    filter 0.6s ease;
+}
+
+.scene-water-fill {
+  transform: translateY(0);
+}
+
+.scene-bin {
+  opacity: 0.6;
+  transition: opacity 0.5s ease;
+}
+
+.scene-floor-shadow {
+  transition: opacity 0.5s ease;
+  opacity: 0.5;
+}
+
+.scene-active .scene-tilt {
+  opacity: 1;
+}
+
+.scene-active .scene-glow {
+  opacity: 1;
+  animation: pulse-ray 2.4s ease-in-out infinite;
+}
+
+.scene-active .scene-rays {
+  opacity: 1;
+  animation: pulse-ray 2.4s ease-in-out infinite;
+}
+
+.scene-active .scene-cell {
+  opacity: 1;
+  animation: pulse-ray 1.8s ease-in-out infinite;
+}
+
+.scene-active .scene-water-fill {
+  animation: scene-water-rise 2.2s ease-out forwards;
+}
+
+.scene-active .scene-bin {
+  opacity: 1;
+}
+
+.scene-active .scene-bin:nth-child(1) {
+  animation: scene-bin-lift 1.6s ease-in-out infinite;
+}
+
+.scene-active .scene-bin:nth-child(2) {
+  animation: scene-bin-lift 1.6s ease-in-out infinite 0.2s;
+}
+
+.scene-active .scene-bin:nth-child(3) {
+  animation: scene-bin-lift 1.6s ease-in-out infinite 0.4s;
+}
+
+.scene-active .scene-bin-glow {
+  opacity: 0.8;
+}
+
+.scene-active .scene-window {
+  opacity: 1;
+  animation: scene-window-pulse 2.4s ease-in-out infinite;
+}
+
+.scene-active .scene-floor-shadow {
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-tilt,
+  .scene-active .scene-glow,
+  .scene-active .scene-rays,
+  .scene-active .scene-cell,
+  .scene-active .scene-water-fill,
+  .scene-active .scene-bin,
+  .scene-active .scene-window {
+    animation: none !important;
+  }
+}
