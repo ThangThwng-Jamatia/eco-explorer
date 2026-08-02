@@ -8,8 +8,8 @@ export function Reveal({
   className,
 }: {
   children: ReactNode;
-  delay?: number;
-  className?: string;
+  delay?: number | undefined;
+  className?: string | undefined;
 }) {
   return (
     <motion.div
@@ -32,8 +32,8 @@ export function Section({
 }: {
   id: string;
   children: ReactNode;
-  className?: string;
-  tone?: "default" | "cream" | "muted";
+  className?: string | undefined;
+  tone?: "default" | "cream" | "muted" | undefined;
 }) {
   return (
     <section
@@ -57,7 +57,7 @@ export function SectionHeading({
 }: {
   eyebrow: string;
   title: string;
-  subtitle?: string;
+  subtitle?: string | undefined;
 }) {
   return (
     <Reveal className="mb-12 text-center">
@@ -94,8 +94,8 @@ export function Counter({
   decimals = 0,
 }: {
   to: number;
-  suffix?: string;
-  decimals?: number;
+  suffix?: string | undefined;
+  decimals?: number | undefined;
 }) {
   const { ref, value } = useCountUp(to);
   return (
@@ -118,9 +118,9 @@ export function StatCard({
 }: {
   label: string;
   to: number;
-  suffix?: string;
-  decimals?: number;
-  icon?: ReactNode;
+  suffix?: string | undefined;
+  decimals?: number | undefined;
+  icon?: ReactNode | undefined;
 }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-5 text-center shadow-soft">
