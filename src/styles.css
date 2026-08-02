@@ -172,6 +172,17 @@
   box-shadow: var(--shadow-glow);
 }
 
+@utility backdrop-blur-xs {
+  backdrop-filter: blur(2px);
+}
+
+@utility glass-card {
+  background: oklch(1 0 0 / 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid oklch(1 0 0 / 0.2);
+  box-shadow: 0 8px 32px oklch(0.35 0.1 150 / 0.1);
+}
+
 @utility num {
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
