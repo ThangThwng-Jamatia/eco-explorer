@@ -114,7 +114,12 @@
   );
   --gradient-leaf: linear-gradient(135deg, var(--emerald), var(--leaf));
   --gradient-sun: linear-gradient(135deg, var(--sun), oklch(0.9 0.12 100));
-  --shadow-soft: 0 10px 30px -12px oklch(0.35 0.1 150 / 0.28);
+  --shadow-soft:
+    0 1px 2px -1px oklch(0.35 0.1 150 / 0.14),
+    0 10px 30px -12px oklch(0.35 0.1 150 / 0.28);
+  --shadow-soft-hover:
+    0 1px 2px -1px oklch(0.35 0.1 150 / 0.16),
+    0 20px 40px -14px oklch(0.35 0.1 150 / 0.38);
   --shadow-glow: 0 0 0 4px oklch(0.75 0.19 135 / 0.35), 0 12px 30px -10px oklch(0.45 0.14 150 / 0.45);
 
   --sidebar: oklch(0.985 0.018 140);
@@ -166,6 +171,14 @@
 
 @utility shadow-soft {
   box-shadow: var(--shadow-soft);
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+
+  &:hover {
+    box-shadow: var(--shadow-soft-hover);
+    transform: translateY(-3px);
+  }
 }
 
 @utility shadow-glow {
